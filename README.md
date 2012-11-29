@@ -1,7 +1,3 @@
-Title:  wikiUp Readme  
-Author: Patricio Tarantino 
-Date:   November 29, 2012
-
 wikiUp
 ======
 
