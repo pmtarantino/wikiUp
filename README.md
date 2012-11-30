@@ -3,6 +3,8 @@ wikiUp
 
 Get Wikipedia descriptions in tooltips.
 
+[Demo](http://pmtarantino.github.com/wikiUp/)
+
 Usage
 -----
 
