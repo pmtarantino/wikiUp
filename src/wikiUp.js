@@ -1,54 +1,99 @@
-function wikiUp(page,wiki,lang) {
+;(function(global, undefined) {
+    "use strict";
 
-	var error_txt	= 'Error. Try again.'; // Error Message.
-	var loading_txt	= 'Loading'; // Loading Message.
-	var lang = typeof lang !== 'undefined' ? lang : 'en'; // Default Lang
+    if (!global.jQuery) {
+        return false;
+    }
 
-    var wikiBox = $('#'+wiki);
-	var url = 'http://'+lang+'.wikipedia.org/w/api.php?callback=?&action=parse&page='+page+'&prop=text&format=json&section=0';
-	$.ajax({
-			type: "GET",
-			url: url,
-			data: {},
-			async:true,
-			contentType: "application/json; charset=utf-8",
-			dataType: "jsonp",
-			success: function(response) {
+    var $ = global.jQuery,
+        wikiQuantity = 0,
 
-				var Find = false;
-				var Par = 0;
-				while(Find == false){
-					Find = true;
-					var intro = $(response.parse.text['*']).filter("p:eq("+Par+")").html();
-					if( intro.indexOf("<span") == 0 ) {
-						var Par = Par+1;
-						var Find = false;
-					}
-				}
-                 wikiBox.empty().html(intro);
-                wikiBox.find("a:not(.references a)").attr("href", function(){ return "http://"+lang+".wikipedia.org" + $(this).attr("href");});
-                wikiBox.find("a").attr("target", "_blank");
-                wikiBox.find('sup.reference').remove(); 
-			},
-			error: function (XMLHttpRequest, textStatus, errorThrown) {
-				wikiBox.html(error_txt);
-			},
-			beforeSend: function (XMLHttpRequest) {
-				wikiBox.html(loading_txt);
-			}
-	});
-	
-}
+        DEFAULTS = {
+            error: 'Error. Try again.',
+            loading: 'Loading',
+            lang: 'en'
+        },
 
-$(document).ready(function(){
-	var wikiQuantity = 0;
-	$('data').mouseover(function(){
-		if($(this).find('span').length){
-		}
-		else{
-			$(this).append("<span class='tooltip'><span></span><div id='Wiki"+wikiQuantity+"'></div></span>");
-			wikiUp($(this).attr('data-wiki'),'Wiki'+wikiQuantity,$(this).attr('data-lang'));
-			wikiQuantity++;
-		}
-	});
-});
+        wikiUp = function($element, options) {
+            var containerId = 'wiki-' + (wikiQuantity++);
+            $element
+                .data('wikiUp', containerId)
+                .bind('mouseover', function() {
+                    if (!$element.children('.tooltip').length) {
+                        $element.append('<div class="tooltip"><span></span><div id="' + containerId + '"></div></div>');
+                        wikiLoad($element, options);
+                    }
+                });
+        },
+
+        wikiLoad = function($element, options) {
+            var $container = $('#' + $element.data('wikiUp')),
+                lang = $element.data('lang') || options.lang,
+                page = $element.data('wiki'),
+                url = 'http://' + lang + '.wikipedia.org/w/api.php?callback=?&action=parse&page=' + page + '&prop=text&format=json&section=0';
+
+            $.ajax({
+                type: 'GET',
+                url: url,
+                data: {},
+                async: true,
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'jsonp',
+                success: function(response) {
+                    var found = false,
+                        paragraphCount = 0,
+                        $allText = $(response.parse.text['*']),
+                        intro;
+                    while (found === false) {
+                        found = true;
+                        intro = $allText.filter('p:eq(' + paragraphCount + ')').html();
+
+                        if (intro.indexOf('<span') === 0) {
+                            paragraphCount++;
+                            found = false;
+                        }
+                    }
+
+                    $container
+                        .html(intro)
+                        .find('a')
+                            .attr('target', '_blank')
+                            .not('.references a')
+                                .attr('href', function(i, href) {
+                                    if (href.indexOf('http') !== 0) {
+                                        href = 'http://' + lang + '.wikipedia.org' + href;
+                                    }
+                                    return href;
+                                })
+                                .end()
+                            .end()
+                        .find('sup.reference')
+                            .remove();
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    $container.html(options.error);
+                },
+                beforeSend: function(XMLHttpRequest) {
+                    $container.html(options.loading);
+                }
+            });
+        };
+
+    $.fn.wikiUp = function(options) {
+        options = $.extend(true, {}, DEFAULTS, options);
+
+        return this.each(function() {
+            var $element = $(this);
+            if (!$element.data('wikiUp')) {
+                wikiUp($element, options);
+            }
+        });
+    };
+
+    // On document ready
+    $(function() {
+        // Default selector to parse
+        $('data[data-wiki]').wikiUp();
+    });
+
+}(this));
