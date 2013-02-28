@@ -12,9 +12,9 @@
             error: 'Error. Try again.',
             loading: 'Loading',
             lang: 'en'
-        },
+        };
 
-        wikiUp = function($element, options) {
+    var wikiUp = function($element, options) {
             var containerId = 'wiki-' + (wikiQuantity++);
             $element
                 .data('wikiUp', containerId)
@@ -24,9 +24,9 @@
                         wikiLoad($element, options);
                     }
                 });
-        },
+        };
 
-        wikiLoad = function($element, options) {
+    var wikiLoad = function($element, options) {
             var $container = $('#' + $element.data('wikiUp')),
                 lang = $element.data('lang') || options.lang,
                 page = $element.data('wiki'),
@@ -93,7 +93,7 @@
     // On document ready
     $(function() {
         // Default selector to parse
-        $('data[data-wiki]').wikiUp();
+        $('[data-wiki]').wikiUp();
     });
 
 }(this));
