@@ -1,52 +1,36 @@
-data > .tooltip, div > .tooltip, li > .tooltip, a > .tooltip, span > .tooltip {
+.tooltip {
 	opacity: 0;
-	margin-top: -10px;
+	margin-top: 30px;
 	visibility: hidden;
 	margin-left: -65px;
 	max-width:300px;
 
-	-webkit-transition-property:opacity, margin-top, visibility, margin-left;
+	-webkit-transition-property:visibility;
 	-webkit-transition-duration:0.5s, 0.3s, 0.5s, 0.3s;  
 	-webkit-transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out;
 	
-	-moz-transition-property:opacity, margin-top, visibility, margin-left;
+	-moz-transition-property:visibility;
 	-moz-transition-duration:0.5s, 0.3s, 0.5s, 0.3s;  
 	-moz-transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out;
 	
-	-o-transition-property:opacity, margin-top, visibility, margin-left;
+	-o-transition-property:visibility;
 	-o-transition-duration:0.5s, 0.3s, 0.5s, 0.3s;  
 	-o-transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out;
 	
-	transition-property:opacity, margin-top, visibility, margin-left;
-	transition-duration:0.5s, 0.3s, 0.5s, 0.3s;  
-	transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in;
+	transition-property:visibility;
+	transition-duration:0.2s;  
+	transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in;*/
 }
 
-	data:hover > .tooltip, div:hover > .tooltip, li:hover > .tooltip, a:hover > .tooltip, span:hover > .tooltip,
-	a .tooltip:hover, span .tooltip:hover, li .tooltip:hover, div .tooltip:hover {
+	[data-wiki]:hover > .tooltip,
+	[data-wiki] .tooltip:hover {
 		opacity: 1;
 		visibility: visible;
 		overflow: visible;
-		margin-top: 30px;
+		margin-top:30px;
 		display: inline;
 		margin-left: -40px;
-		
-		-webkit-transition-property:opacity, margin-top, visibility, margin-left;
-		-webkit-transition-duration:0.5s, 0.3s, 0.5s, 0.3s;  
-		-webkit-transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out;
-		
-		-moz-transition-property:opacity, margin-top, visibility, margin-left;
-		-moz-transition-duration:0.5s, 0.3s, 0.5s, 0.3s;  
-		-moz-transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out;		
-		
-		-o-transition-property:opacity, margin-top, margin-left;
-		-o-transition-duration:0.5s, 0.3s, 0.3s;  
-		-o-transition-timing-function: ease-in-out, ease-in-out, ease-in-out;
-		
-		transition-property:opacity, margin-top, visibility, margin-left;
-		transition-duration:0.5s, 0.3s, 0.5s;  
-		transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out;		
-	}
+		}
 
 .tooltip {
 	background: #FFFBCF;

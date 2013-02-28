@@ -8,15 +8,6 @@
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
 	<link rel="stylesheet" href="stylesheets/wikiUp.css">
-	<style>
-	data{
-	font-weight:bold;
-	}
-	data span{
-	font-weight:normal;
-	}
-	</style>
-
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -48,17 +39,19 @@
 
 <p>Then, call like this:</p>
 
-<pre><code>&lt;data data-wiki="Apple Inc."&gt;Apple&lt;/data&gt; was founded by &lt;data data-wiki="Steve Jobs"&gt;Steve Jobs&lt;/data&gt;.
+<pre><code>&lt;span data-wiki="Apple Inc."&gt;Apple&lt;/data&gt; was founded by &lt;data data-wiki="Steve Jobs"&gt;Steve Jobs&lt;/span&gt;.
 </code></pre>
 
 If you want to get data in a different language, use <em>data-lang</em>:
-<pre><code>&lt;data data-wiki="Madrid" data-lang="es"&gt;Madrid&lt;/data&gt; es la capital de Espa&ntilde;a.
+<pre><code>&lt;span data-wiki="Madrid" data-lang="es"&gt;Madrid&lt;/span&gt; es la capital de Espa&ntilde;a.
 </code></pre>
+
+<p>Previously, it used the HTML element data, but it didn't validate with HTML5, so now it will get any element with the data-wiki attribute.</p>
 
 <h2>Example</h2>
 
-<p>I never been in <data data-wiki='San Francisco'>San Francisco</data>. I live in <data data-wiki='Buenos Aires' data-lang='es'>Buenos Aires</data>.
-<br><data data-wiki='Apple Inc.'>Apple</data> was founded by <data data-wiki='Steve Jobs'>Steve Jobs</data>.</p>
+<p>I never been in <span data-wiki='San Francisco'>San Francisco</span>. I live in <span data-wiki='Buenos Aires' data-lang='es'>Buenos Aires</span>.
+<br><span data-wiki='Apple Inc.'>Apple</span> was founded by <span data-wiki='Steve Jobs'>Steve Jobs</span>.</p>
 
 <h2>Tooltip</h2>
 
