@@ -1,0 +1,25 @@
+{
+    "name": "wikiup",
+    "title": "wikiUp - Get Wikipedia descriptions in tooltips.",
+    "description": "Get Wikipedia descriptions in tooltips.",
+    "keywords": [
+        "wikipedia",
+        "tooltip"
+    ],
+    "version": "1.1",
+    "author": {
+        "name": "Patricio Tarantino",
+        "email": "patriciotarantino@gmail.com"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/jquery/jquery-color/blob/2.1.2/MIT-LICENSE.txt"
+        }
+    ],
+    "homepage": "http://pmtarantino.github.com/wikiUp/",
+    "docs": "pmtarantino.github.com/wikiUp/,
+    "dependencies": {
+        "jquery": ">=1.6"
+    }
+}
