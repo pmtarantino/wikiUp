@@ -12,7 +12,9 @@ Include: jQuery.js, wikiUp.js and wikiUp.css
 
 Then, call like this:
 
-	<data data-wiki="Apple Inc.">Apple</data> was founded by <data data-wiki="Steve Jobs">Steve Jobs</data>.
+```html
+<span data-wiki="Apple Inc.">Apple</span> was founded by <span data-wiki="Steve Jobs">Steve Jobs</span>.
+```
 
 Tooltip
 -------
