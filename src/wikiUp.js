@@ -40,14 +40,15 @@
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'jsonp',
                 success: function(response) {
+
                     var found = false,
                         paragraphCount = 0,
                         $allText = $(response.parse.text['*']),
                         intro;
                     while (found === false) {
                         found = true;
-                        intro = $allText.filter('p:eq(' + paragraphCount + ')').html();
-
+                        $allText.find('table').remove();
+                        intro = $allText.find('p:eq(' + paragraphCount + ')').html();
                         if (intro.indexOf('<span') === 0) {
                             paragraphCount++;
                             found = false;
